@@ -14,29 +14,9 @@ package frc.robot;
  * floating around.
  */
 public class RobotMap {
-  public static final int GRABBER_TOP_MOTOR = 5;
-  public static final int GRABBER_BOTTOM_MOTOR = 2;
-
-  public static final int CARGO_ARM_ENCODER_PORT = 4;
-
-  public static final int HATCH_EXTENDER_SOLENOID_MODULE = 0;
-  public static final int HATCH_EXTENDER_SOLENOID_CHANNEL = 2;
-  public static final int HATCH_GRABBER_SOLENOID_MODULE = 0;
-  public static final int HATCH_GRABBER_SOLENOID_CHANNEL = 1;
-
-  public static final int HATCH_GRABBER_LIMIT_SWITCH_LEFT = 0;
-  public static final int HATCH_GRABBER_LIMIT_SWITCH_RIGHT = 1;
-
-  public static final int ARM_MOTOR_A = 9;
-  public static final int ARM_MOTOR_B = 8;
-
-  public static final int CLIMBER_SOLENOID_MODULE = 0;
-  public static final int CLIMBER_SOLENOID_CHANNEL = 0;
-  public static final int KICKSTAND_SOLENOID_MODULE = 0;
-  public static final int KICKSTAND_SOLENOID_CHANNEL = 3;
-
-  public static final int HATCH_FLOOR_GATHERER_ARM_MOTOR = 1;
-  public static final int HATCH_FLOOR_GATHERER_FLOOR_MOTOR = 8;
+ 
+  public static final int LEFT_JOYSTICK_CHANNEL = 3;
+  public static final int RIGHT_JOYSTICK_CHANNEL = 2;
 
   public static final int DRIVETRAIN_FRONT_LEFT_ANGLE_MOTOR = 4;
   public static final int DRIVETRAIN_FRONT_LEFT_ANGLE_ENCODER = 0;

@@ -20,23 +20,23 @@ public class HolonomicDriveCommand extends Command {
 
 @Override
 protected void execute() {
-    // boolean ignoreScalars = Robot.oi.primaryController.getLeftBumperButton().get();
+    //boolean ignoreScalars = Robot.oi.primaryController.getLeftBumperButton().get();
 
-    // double forward = Robot.oi.primaryController.getLeftYAxis().get(true);
-    // double strafe = Robot.oi.primaryController.getLeftXAxis().get(true);
-    // double rotation = Robot.oi.primaryController.getRightXAxis().get(true, ignoreScalars);
+    double forward = Robot.oi.rightStick.getRawAxis(1);
+    double strafe = Robot.oi.rightStick.getRawAxis(0);
+    double rotation = Robot.oi.rightStick.getRawAxis(2);
 
-    // boolean robotOriented = Robot.oi.primaryController.getXButton().get();
-    // boolean reverseRobotOriented = Robot.oi.primaryController.getYButton().get();
+    boolean robotOriented = false;
+    boolean reverseRobotOriented = false;
 
-    // Vector2 translation = new Vector2(forward, strafe);
+    Vector2 translation = new Vector2(forward, strafe);
 
     // if (reverseRobotOriented) {
     //     robotOriented = true;
     //     translation = translation.rotateBy(Rotation2.fromDegrees(180.0));
     // }
 
-    // DrivetrainSubsystem.getInstance().holonomicDrive(translation, rotation, !robotOriented);
+    DrivetrainSubsystem.getInstance().holonomicDrive(translation, rotation, !robotOriented);
 }
 
 @Override
