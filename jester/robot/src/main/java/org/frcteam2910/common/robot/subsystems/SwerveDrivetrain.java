@@ -16,9 +16,10 @@ public abstract class SwerveDrivetrain extends HolonomicDrivetrain {
         if (fieldOriented) {
             translation = translation.rotateBy(getGyroscope().getAngle().inverse());
         }
-
+        //System.out.println("SwerveDrivetrain.holodrive()" + translation + " " + rotation);
         for (SwerveModule module : getSwerveModules()) {
             Vector2 velocity = module.getModulePosition().normal().scale(rotation).add(translation);
+            System.out.println(module.getName() + " " + velocity.x + " " + velocity.y);
 
             module.setTargetVelocity(velocity);
         }

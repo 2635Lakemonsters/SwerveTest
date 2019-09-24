@@ -141,6 +141,7 @@ public abstract class SwerveModule {
      * @param velocity the target velocity
      */
     public final void setTargetVelocity(Vector2 velocity) {
+        //System.out.println("setTargetVelocity" + velocity);
         synchronized (stateMutex) {
             targetSpeed = velocity.length;
             targetAngle = velocity.getAngle().toRadians();
@@ -261,7 +262,7 @@ public abstract class SwerveModule {
         if (targetAngle < 0.0) {
             targetAngle += 2.0 * Math.PI;
         }
-
+        System.out.println(getName() + " " + targetSpeed + " " + targetAngle);
         setTargetAngle(targetAngle);
         setDriveOutput(targetSpeed);
     }

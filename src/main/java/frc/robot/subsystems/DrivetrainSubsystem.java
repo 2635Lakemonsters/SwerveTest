@@ -18,6 +18,7 @@ import org.frcteam2910.common.drivers.Gyroscope;
 import org.frcteam2910.common.drivers.SwerveModule;
 import org.frcteam2910.common.math.RigidTransform2;
 import org.frcteam2910.common.math.Vector2;
+import org.frcteam2910.common.robot.drivers.NavX;
 import org.frcteam2910.common.robot.subsystems.SwerveDrivetrain;
 import org.frcteam2910.common.util.DrivetrainFeedforwardConstants;
 import org.frcteam2910.common.util.HolonomicDriveSignal;
@@ -29,7 +30,12 @@ import frc.robot.Mk2SwerveModule;
 import frc.robot.RobotMap;
 import frc.robot.commands.HolonomicDriveCommand;
 
+import com.kauailabs.navx.frc.AHRS;
 import com.revrobotics.CANSparkMax;
+import edu.wpi.first.wpilibj.SPI;
+
+
+
 
 /**
  * Add your docs here.
@@ -58,6 +64,9 @@ public class DrivetrainSubsystem extends SwerveDrivetrain {
   private static final HolonomicFeedforward FOLLOWER_FEEDFORWARD_CONSTANTS = new HolonomicFeedforward(
           new DrivetrainFeedforwardConstants(1.0 / (14.0 * 12.0), 0.0, 0.0)
   );
+
+ //fix this
+  private NavX navX = new NavX(SPI.Port.kMXP);
 
   private static final PidConstants SNAP_ROTATION_CONSTANTS = new PidConstants(0.3, 0.01, 0.0);
 
@@ -147,6 +156,7 @@ public class DrivetrainSubsystem extends SwerveDrivetrain {
 
   @Override
   public void holonomicDrive(Vector2 translation, double rotation, boolean fieldOriented) {
+      //System.out.println("Subsystem.holonimicDrive" + translation + " " + rotation);
       synchronized (lock) {
           this.signal = new HolonomicDriveSignal(translation, rotation, fieldOriented);
       }
@@ -155,7 +165,7 @@ public class DrivetrainSubsystem extends SwerveDrivetrain {
   @Override
   public synchronized void updateKinematics(double timestamp) {
       super.updateKinematics(timestamp);
-
+        //System.out.println("Sybsystem.updateKinematics");
       double dt = timestamp - lastTimestamp;
       lastTimestamp = timestamp;
 
@@ -193,6 +203,7 @@ public class DrivetrainSubsystem extends SwerveDrivetrain {
           }
       }
 
+      //System.out.println("translation: " + localSignal.getTranslation() + " rotation: " + localSignal.getRotation());
       super.holonomicDrive(localSignal.getTranslation(), localSignal.getRotation(), localSignal.isFieldOriented());
   }
 
@@ -234,8 +245,7 @@ public class DrivetrainSubsystem extends SwerveDrivetrain {
 
   @Override
   public Gyroscope getGyroscope() {
-      //return Superstructure.getInstance().getGyroscope();
-      return null;
+      return navX;
   }
 
   @Override

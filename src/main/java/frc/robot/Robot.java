@@ -7,12 +7,15 @@
 
 package frc.robot;
 
+import org.frcteam2910.common.robot.subsystems.SubsystemManager;
+
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.commands.HolonomicDriveCommand;
+import frc.robot.subsystems.DrivetrainSubsystem;
 
 
 /**
@@ -24,11 +27,16 @@ import frc.robot.commands.HolonomicDriveCommand;
  */
 public class Robot extends TimedRobot {
   public static OI oi;
+  private static final double UPDATE_DT = 5e-3; // 5 ms
 
   Command m_autonomousCommand;
   SendableChooser<Command> m_chooser = new SendableChooser<>();
 
   HolonomicDriveCommand driveCommand;
+
+  private final SubsystemManager subsystemManager = new SubsystemManager(
+            DrivetrainSubsystem.getInstance()
+    );
 
   /**
    * This function is run when the robot is first started up and should be
@@ -41,6 +49,9 @@ public class Robot extends TimedRobot {
     SmartDashboard.putData("Auto mode", m_chooser);
 
     driveCommand = new HolonomicDriveCommand();
+
+    subsystemManager.enableKinematicLoop(UPDATE_DT);
+
 
     driveCommand.start();
   }
