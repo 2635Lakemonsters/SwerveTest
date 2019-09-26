@@ -15,8 +15,8 @@ package frc.robot;
  */
 public class RobotMap {
  
-  public static final int LEFT_JOYSTICK_CHANNEL = 3;
-  public static final int RIGHT_JOYSTICK_CHANNEL = 2;
+  public static final int LEFT_JOYSTICK_CHANNEL = 0;
+  public static final int RIGHT_JOYSTICK_CHANNEL = 1;
 
   public static final int DRIVETRAIN_FRONT_LEFT_ANGLE_MOTOR = 2;
   public static final int DRIVETRAIN_FRONT_LEFT_ANGLE_ENCODER = 0;

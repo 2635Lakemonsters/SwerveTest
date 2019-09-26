@@ -262,7 +262,7 @@ public abstract class SwerveModule {
         if (targetAngle < 0.0) {
             targetAngle += 2.0 * Math.PI;
         }
-        System.out.println(getName() + " " + targetSpeed + " " + targetAngle);
+        //System.out.println(getName() + " " + targetSpeed + " " + targetAngle);
         setTargetAngle(targetAngle);
         setDriveOutput(targetSpeed);
     }
