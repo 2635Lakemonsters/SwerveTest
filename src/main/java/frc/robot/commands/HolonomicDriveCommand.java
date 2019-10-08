@@ -26,6 +26,7 @@ protected void execute() {
     double strafe = Robot.oi.rightStick.getRawAxis(0);
     double rotation = Robot.oi.rightStick.getRawAxis(2);
 
+    
     boolean robotOriented = false;
     boolean reverseRobotOriented = false;
 
