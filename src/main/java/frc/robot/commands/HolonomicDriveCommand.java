@@ -35,7 +35,7 @@ protected void execute() {
     //     robotOriented = true;
     //     translation = translation.rotateBy(Rotation2.fromDegrees(180.0));
     // }
-    System.out.println("HoloDriveCommand.execute" + translation + " " + rotation);
+    //System.out.println("HoloDriveCommand.execute" + translation + " " + rotation);
     DrivetrainSubsystem.getInstance().holonomicDrive(translation, rotation, !robotOriented);
 }
 

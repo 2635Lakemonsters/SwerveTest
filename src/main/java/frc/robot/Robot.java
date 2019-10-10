@@ -7,6 +7,9 @@
 
 package frc.robot;
 
+import com.revrobotics.CANSparkMax;
+import com.revrobotics.CANSparkMaxLowLevel.MotorType;
+
 import org.frcteam2910.common.robot.subsystems.SubsystemManager;
 
 import edu.wpi.first.wpilibj.TimedRobot;
@@ -37,7 +40,7 @@ public class Robot extends TimedRobot {
   private final SubsystemManager subsystemManager = new SubsystemManager(
             DrivetrainSubsystem.getInstance()
     );
-
+  CANSparkMax motor;
   /**
    * This function is run when the robot is first started up and should be
    * used for any initialization code.
@@ -53,7 +56,8 @@ public class Robot extends TimedRobot {
     subsystemManager.enableKinematicLoop(UPDATE_DT);
 
 
-    driveCommand.start();
+    //driveCommand.start();
+    motor = new CANSparkMax(1, MotorType.kBrushless);
   }
 
   /**
@@ -136,6 +140,7 @@ public class Robot extends TimedRobot {
   public void teleopPeriodic() {
     Scheduler.getInstance().run();
     //System.out.println("teleopPeriodic");
+    //motor.set(0.5);
   }
 
   /**

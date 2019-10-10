@@ -17,10 +17,13 @@ import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.Notifier;
 import edu.wpi.first.wpilibj.RobotController;
 import edu.wpi.first.wpilibj.Spark;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+
 import org.frcteam2910.common.control.PidConstants;
 import org.frcteam2910.common.control.PidController;
 import org.frcteam2910.common.drivers.SwerveModule;
 import org.frcteam2910.common.math.Vector2;
+
 
 import java.util.concurrent.atomic.AtomicLong;
 
@@ -64,6 +67,7 @@ public class Mk2SwerveModule extends SwerveModule {
             drivePercentOutput = Mk2SwerveModule.this.drivePercentOutput;
         }
         driveMotor.set(drivePercentOutput);
+        //if(getName() == "Front Left") System.out.println(getName() + " drivePercentOutput: " + drivePercentOutput);
     });
 
     private PidController angleController = new PidController(ANGLE_CONSTANTS);
@@ -93,7 +97,7 @@ public class Mk2SwerveModule extends SwerveModule {
         if (angle < 0.0) {
             angle += 2.0 * Math.PI;
         }
-
+        SmartDashboard.putNumber(getName(), Math.toDegrees((1.0 - angleEncoder.getVoltage() / RobotController.getVoltage5V()) * 2.0 * Math.PI));
         return angle;
     }
 
