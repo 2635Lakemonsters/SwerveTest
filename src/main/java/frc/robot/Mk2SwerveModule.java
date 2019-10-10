@@ -97,7 +97,10 @@ public class Mk2SwerveModule extends SwerveModule {
         if (angle < 0.0) {
             angle += 2.0 * Math.PI;
         }
+
         SmartDashboard.putNumber(getName(), Math.toDegrees((1.0 - angleEncoder.getVoltage() / RobotController.getVoltage5V()) * 2.0 * Math.PI));
+
+
         return angle;
     }
 
