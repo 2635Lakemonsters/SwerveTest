@@ -27,7 +27,7 @@ protected void execute() {
     double rotation = Robot.oi.rightStick.getRawAxis(2);
 
     
-    boolean robotOriented = false;
+    boolean robotOriented = true;
     boolean reverseRobotOriented = false;
 
     Vector2 translation = new Vector2(forward, strafe);

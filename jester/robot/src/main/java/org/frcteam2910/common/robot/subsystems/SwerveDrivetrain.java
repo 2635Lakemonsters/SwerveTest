@@ -12,6 +12,7 @@ public abstract class SwerveDrivetrain extends HolonomicDrivetrain {
     private Vector2 kinematicVelocity = Vector2.ZERO;
     private double lastKinematicTimestamp;
 
+    Vector2 staticVelocity = new Vector2(0.1,0.1); //
     public void holonomicDrive(Vector2 translation, double rotation, boolean fieldOriented) {
         if (fieldOriented) {
             translation = translation.rotateBy(getGyroscope().getAngle().inverse());
@@ -20,8 +21,11 @@ public abstract class SwerveDrivetrain extends HolonomicDrivetrain {
         for (SwerveModule module : getSwerveModules()) {
             Vector2 velocity = module.getModulePosition().normal().scale(rotation).add(translation);
             //System.out.println(module.getName() + " " + velocity.x + " " + velocity.y);
-
+            
             module.setTargetVelocity(velocity);
+            //--------EXPERIMENTAL---------------------
+            //module.setTargetVelocity(staticVelocity); //
+            //--------------------------------------
         }
     }
 

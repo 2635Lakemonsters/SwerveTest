@@ -17,6 +17,7 @@ import org.frcteam2910.common.control.*;
 import org.frcteam2910.common.drivers.Gyroscope;
 import org.frcteam2910.common.drivers.SwerveModule;
 import org.frcteam2910.common.math.RigidTransform2;
+import org.frcteam2910.common.math.Rotation2;
 import org.frcteam2910.common.math.Vector2;
 import org.frcteam2910.common.robot.drivers.NavX;
 import org.frcteam2910.common.robot.subsystems.SwerveDrivetrain;
@@ -41,19 +42,19 @@ import edu.wpi.first.wpilibj.SPI;
  * Add your docs here.
  */
 public class DrivetrainSubsystem extends SwerveDrivetrain {
-  private static final double TRACKWIDTH = 19.5;
-  private static final double WHEELBASE = 23.5;
+  private static final double TRACKWIDTH = 21.0;
+  private static final double WHEELBASE = 25.0;
 
   public static final ITrajectoryConstraint[] CONSTRAINTS = {
           new MaxVelocityConstraint(12.0 * 12.0),
-          new MaxAccelerationConstraint(15.0 * 12.0),
+          new MaxAccelerationConstraint(15.0 * 12.0),                                 
           new CentripetalAccelerationConstraint(25.0 * 12.0)
   };    
 
-  private static final double FRONT_LEFT_ANGLE_OFFSET_COMPETITION = Math.toRadians(-50.00 + 180.0); //42
-  private static final double FRONT_RIGHT_ANGLE_OFFSET_COMPETITION = Math.toRadians(-284.47 + 180.0); //164
-  private static final double BACK_LEFT_ANGLE_OFFSET_COMPETITION = Math.toRadians(-331.52 + 180.0); //334
-  private static final double BACK_RIGHT_ANGLE_OFFSET_COMPETITION = Math.toRadians(-209.22); //215
+  private static final double FRONT_LEFT_ANGLE_OFFSET_COMPETITION = Math.toRadians(-42.00 + 180.0); //42
+  private static final double FRONT_RIGHT_ANGLE_OFFSET_COMPETITION = Math.toRadians(-164.00 + 180.0); //164
+  private static final double BACK_LEFT_ANGLE_OFFSET_COMPETITION = Math.toRadians(-334.00 + 180.0); //334
+  private static final double BACK_RIGHT_ANGLE_OFFSET_COMPETITION = Math.toRadians(-215.00); //215
   private static final double FRONT_LEFT_ANGLE_OFFSET_PRACTICE = Math.toRadians(-56.53 + 180);
   private static final double FRONT_RIGHT_ANGLE_OFFSET_PRACTICE = Math.toRadians(-109.38 + 180);
   private static final double BACK_LEFT_ANGLE_OFFSET_PRACTICE = Math.toRadians(-4.21 + 180);
@@ -174,8 +175,19 @@ public class DrivetrainSubsystem extends SwerveDrivetrain {
           localSnapRotation = snapRotation;
       }
 
-      Optional<HolonomicDriveSignal> optSignal = follower.update(new RigidTransform2(getKinematicPosition(),
-              getGyroscope().getAngle()), getKinematicVelocity(), getGyroscope().getRate(), timestamp, dt);
+      double gyroRate = getGyroscope().getRate();
+      Vector2 kinematicVelocity = getKinematicVelocity();
+      Rotation2 gyroAngle = getGyroscope().getAngle();
+      Vector2 kinematicPosition = getKinematicPosition();
+      RigidTransform2 rigidTransform = new RigidTransform2(kinematicPosition,  gyroAngle);
+
+      SmartDashboard.putNumber("Gyro Rate: ", gyroRate);
+      SmartDashboard.putNumber("Kinematic Velocity: ", kinematicVelocity.x);
+      SmartDashboard.putNumber("Gyro Angle: ", gyroAngle.toDegrees());
+      SmartDashboard.putNumber("Kinematic Position: ", kinematicPosition.length);
+      //SmartDashboard.putNumber("Rigid Transform: ", rigidTransform.);
+
+      Optional<HolonomicDriveSignal> optSignal = follower.update(rigidTransform, kinematicVelocity, gyroRate, timestamp, dt);
       HolonomicDriveSignal localSignal;
 
       if (optSignal.isPresent()) {
