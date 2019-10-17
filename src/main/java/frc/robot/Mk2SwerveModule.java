@@ -35,7 +35,7 @@ public class Mk2SwerveModule extends SwerveModule {
 
     private final double angleOffset;
 
-    private Spark angleMotor;
+    private CANSparkMax angleMotor;
     private AnalogInput angleEncoder;
     private CANSparkMax driveMotor;
     private CANEncoder driveEncoder;
@@ -73,7 +73,7 @@ public class Mk2SwerveModule extends SwerveModule {
     private PidController angleController = new PidController(ANGLE_CONSTANTS);
 
     public Mk2SwerveModule(Vector2 modulePosition, double angleOffset,
-                           Spark angleMotor, CANSparkMax driveMotor, AnalogInput angleEncoder) {
+                           CANSparkMax angleMotor, CANSparkMax driveMotor, AnalogInput angleEncoder) {
         super(modulePosition);
         this.angleOffset = angleOffset;
         this.angleMotor = angleMotor;
@@ -98,7 +98,7 @@ public class Mk2SwerveModule extends SwerveModule {
             angle += 2.0 * Math.PI;
         }
 
-        SmartDashboard.putNumber(getName(), Math.toDegrees((1.0 - angleEncoder.getVoltage() / RobotController.getVoltage5V()) * 2.0 * Math.PI) + angleOffset);
+        SmartDashboard.putNumber(getName(), Math.toDegrees((1.0 - angleEncoder.getVoltage() / RobotController.getVoltage5V()) * 2.0 * Math.PI + angleOffset));
 
 
         return angle;

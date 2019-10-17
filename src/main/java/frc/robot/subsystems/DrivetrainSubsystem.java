@@ -51,8 +51,8 @@ public class DrivetrainSubsystem extends SwerveDrivetrain {
           new CentripetalAccelerationConstraint(25.0 * 12.0)
   };    
 
-  private static final double FRONT_LEFT_ANGLE_OFFSET_COMPETITION = Math.toRadians(-42.00 + 180.0); //42
-  private static final double FRONT_RIGHT_ANGLE_OFFSET_COMPETITION = Math.toRadians(-164.00 + 180.0); //164
+  private static final double FRONT_LEFT_ANGLE_OFFSET_COMPETITION = Math.toRadians(-285 + 180.0); //42
+  private static final double FRONT_RIGHT_ANGLE_OFFSET_COMPETITION = Math.toRadians(-164.00); //164
   private static final double BACK_LEFT_ANGLE_OFFSET_COMPETITION = Math.toRadians(-334.00 + 180.0); //334
   private static final double BACK_RIGHT_ANGLE_OFFSET_COMPETITION = Math.toRadians(-215.00); //215
   private static final double FRONT_LEFT_ANGLE_OFFSET_PRACTICE = Math.toRadians(-56.53 + 180);
@@ -105,7 +105,7 @@ public class DrivetrainSubsystem extends SwerveDrivetrain {
       SwerveModule frontLeftModule = new Mk2SwerveModule(
               new Vector2(-TRACKWIDTH / 2.0, WHEELBASE / 2.0),
               frontLeftAngleOffset,
-              new Spark(RobotMap.DRIVETRAIN_FRONT_LEFT_ANGLE_MOTOR),
+              new CANSparkMax(RobotMap.DRIVETRAIN_FRONT_LEFT_ANGLE_MOTOR, CANSparkMaxLowLevel.MotorType.kBrushless),
               new CANSparkMax(RobotMap.DRIVETRAIN_FRONT_LEFT_DRIVE_MOTOR, CANSparkMaxLowLevel.MotorType.kBrushless),
               new AnalogInput(RobotMap.DRIVETRAIN_FRONT_LEFT_ANGLE_ENCODER)
       );
@@ -114,7 +114,7 @@ public class DrivetrainSubsystem extends SwerveDrivetrain {
       SwerveModule frontRightModule = new Mk2SwerveModule(
               new Vector2(TRACKWIDTH / 2.0, WHEELBASE / 2.0),
               frontRightAngleOffset,
-              new Spark(RobotMap.DRIVETRAIN_FRONT_RIGHT_ANGLE_MOTOR),
+              new CANSparkMax(RobotMap.DRIVETRAIN_FRONT_RIGHT_ANGLE_MOTOR, CANSparkMaxLowLevel.MotorType.kBrushless),
               new CANSparkMax(RobotMap.DRIVETRAIN_FRONT_RIGHT_DRIVE_MOTOR, CANSparkMaxLowLevel.MotorType.kBrushless),
               new AnalogInput(RobotMap.DRIVETRAIN_FRONT_RIGHT_ANGLE_ENCODER)
       );
@@ -123,7 +123,7 @@ public class DrivetrainSubsystem extends SwerveDrivetrain {
       SwerveModule backLeftModule = new Mk2SwerveModule(
               new Vector2(-TRACKWIDTH / 2.0, -WHEELBASE / 2.0),
               backLeftAngleOffset,
-              new Spark(RobotMap.DRIVETRAIN_BACK_LEFT_ANGLE_MOTOR),
+              new CANSparkMax(RobotMap.DRIVETRAIN_BACK_LEFT_ANGLE_MOTOR, CANSparkMaxLowLevel.MotorType.kBrushless),
               new CANSparkMax(RobotMap.DRIVETRAIN_BACK_LEFT_DRIVE_MOTOR, CANSparkMaxLowLevel.MotorType.kBrushless),
               new AnalogInput(RobotMap.DRIVETRAIN_BACK_LEFT_ANGLE_ENCODER)
       );
@@ -132,7 +132,7 @@ public class DrivetrainSubsystem extends SwerveDrivetrain {
       SwerveModule backRightModule = new Mk2SwerveModule(
               new Vector2(TRACKWIDTH / 2.0, -WHEELBASE / 2.0),
               backRightAngleOffset,
-              new Spark(RobotMap.DRIVETRAIN_BACK_RIGHT_ANGLE_MOTOR),
+              new CANSparkMax(RobotMap.DRIVETRAIN_BACK_RIGHT_ANGLE_MOTOR, CANSparkMaxLowLevel.MotorType.kBrushless),
               new CANSparkMax(RobotMap.DRIVETRAIN_BACK_RIGHT_DRIVE_MOTOR, CANSparkMaxLowLevel.MotorType.kBrushless),
               new AnalogInput(RobotMap.DRIVETRAIN_BACK_RIGHT_ANGLE_ENCODER)
       );
