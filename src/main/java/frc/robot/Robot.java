@@ -10,6 +10,7 @@ package frc.robot;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
+import org.frcteam2910.common.robot.commands.ZeroFieldOrientedCommand;
 import org.frcteam2910.common.robot.subsystems.SubsystemManager;
 
 import edu.wpi.first.wpilibj.TimedRobot;
@@ -36,6 +37,7 @@ public class Robot extends TimedRobot {
   SendableChooser<Command> m_chooser = new SendableChooser<>();
 
   HolonomicDriveCommand driveCommand;
+  ZeroFieldOrientedCommand zeroCommand;
 
   private final SubsystemManager subsystemManager = new SubsystemManager(
             DrivetrainSubsystem.getInstance()
@@ -50,9 +52,12 @@ public class Robot extends TimedRobot {
     oi = new OI();
     // chooser.addOption("My Auto", new MyAutoCommand());
     SmartDashboard.putData("Auto mode", m_chooser);
+    zeroCommand = new ZeroFieldOrientedCommand(DrivetrainSubsystem.getInstance());
+    System.out.println("start zeroCommand");
 
     driveCommand = new HolonomicDriveCommand();
 
+    
     subsystemManager.enableKinematicLoop(UPDATE_DT);
 
 
@@ -124,6 +129,8 @@ public class Robot extends TimedRobot {
 
   @Override
   public void teleopInit() {
+    zeroCommand.start();
+
     // This makes sure that the autonomous stops running when
     // teleop starts running. If you want the autonomous to
     // continue until interrupted by another command, remove

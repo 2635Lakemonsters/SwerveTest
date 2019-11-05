@@ -12,6 +12,7 @@ public class ZeroFieldOrientedCommand extends Command {
 
     @Override
     protected void initialize() {
+        System.out.println("adjustmentAngle: " + drivetrain.getGyroscope().getUnadjustedAngle().toDegrees());
         drivetrain.getGyroscope().setAdjustmentAngle(drivetrain.getGyroscope().getUnadjustedAngle());
     }
 

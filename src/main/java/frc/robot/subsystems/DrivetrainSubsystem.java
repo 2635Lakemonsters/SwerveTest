@@ -51,10 +51,10 @@ public class DrivetrainSubsystem extends SwerveDrivetrain {
           new CentripetalAccelerationConstraint(25.0 * 12.0)
   };    
 
-  private static final double BACK_RIGHT_ANGLE_OFFSET_COMPETITION = Math.toRadians(-285 + 180.0); //42
-  private static final double BACK_LEFT_ANGLE_OFFSET_COMPETITION = Math.toRadians(-164.00); //164
-  private static final double FRONT_RIGHT_ANGLE_OFFSET_COMPETITION = Math.toRadians(-334.00 + 180.0); //334
-  private static final double FRONT_LEFT_ANGLE_OFFSET_COMPETITION = Math.toRadians(-215.00); //215
+  private static final double BACK_RIGHT_ANGLE_OFFSET_COMPETITION = Math.toRadians(-272); //272
+  private static final double BACK_LEFT_ANGLE_OFFSET_COMPETITION = Math.toRadians(-346); //346
+  private static final double FRONT_RIGHT_ANGLE_OFFSET_COMPETITION = Math.toRadians(-331); //331
+  private static final double FRONT_LEFT_ANGLE_OFFSET_COMPETITION = Math.toRadians(-37); //37
   private static final double FRONT_LEFT_ANGLE_OFFSET_PRACTICE = Math.toRadians(-56.53 + 180);
   private static final double FRONT_RIGHT_ANGLE_OFFSET_PRACTICE = Math.toRadians(-109.38 + 180);
   private static final double BACK_LEFT_ANGLE_OFFSET_PRACTICE = Math.toRadians(-4.21 + 180);
@@ -68,7 +68,7 @@ public class DrivetrainSubsystem extends SwerveDrivetrain {
 
  //fix this
   private NavX navX = new NavX(SPI.Port.kMXP);
-
+  
   private static final PidConstants SNAP_ROTATION_CONSTANTS = new PidConstants(0.3, 0.01, 0.0);
 
   private static final DrivetrainSubsystem instance = new DrivetrainSubsystem();
@@ -180,7 +180,7 @@ public class DrivetrainSubsystem extends SwerveDrivetrain {
       Rotation2 gyroAngle = getGyroscope().getAngle();
       Vector2 kinematicPosition = getKinematicPosition();
       RigidTransform2 rigidTransform = new RigidTransform2(kinematicPosition,  gyroAngle);
-
+      
       SmartDashboard.putNumber("Gyro Rate: ", gyroRate);
       SmartDashboard.putNumber("Kinematic Velocity: ", kinematicVelocity.x);
       SmartDashboard.putNumber("Gyro Angle: ", gyroAngle.toDegrees());

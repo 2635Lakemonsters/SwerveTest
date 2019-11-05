@@ -14,6 +14,14 @@ public abstract class SwerveDrivetrain extends HolonomicDrivetrain {
 
     Vector2 staticVelocity = new Vector2(0.1,0.1); //
     public void holonomicDrive(Vector2 translation, double rotation, boolean fieldOriented) {
+        double angle = getGyroscope().getAngle().toDegrees();
+        double inverse = getGyroscope().getAngle().inverse().toDegrees();
+
+        SmartDashboard.putNumber("Angle", angle);
+        SmartDashboard.putNumber("Inverse", inverse);
+
+
+
         if (fieldOriented) {
             translation = translation.rotateBy(getGyroscope().getAngle().inverse());
         }

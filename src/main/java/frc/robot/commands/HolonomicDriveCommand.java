@@ -20,14 +20,20 @@ public class HolonomicDriveCommand extends Command {
 
 @Override
 protected void execute() {
-    //boolean ignoreScalars = Robot.oi.primaryController.getLeftBumperButton().get();
+    //boolean ignoreScalars = Robot.oi.primaryController.getforwardBumperButton().get();
 
     double forward = Robot.oi.rightStick.getRawAxis(1);
     double strafe = Robot.oi.rightStick.getRawAxis(0);
     double rotation = Robot.oi.rightStick.getRawAxis(2);
 
+    double deadzone = 0.1;
     
-    boolean robotOriented = true;
+    forward = deadZoneAdjust(forward, deadzone);
+    strafe = deadZoneAdjust(strafe, deadzone);
+    rotation = deadZoneAdjust(rotation, deadzone);
+
+    
+    boolean robotOriented = false;
     boolean reverseRobotOriented = false;
 
     Vector2 translation = new Vector2(forward, strafe);
@@ -38,6 +44,17 @@ protected void execute() {
     // }
     //System.out.println("HoloDriveCommand.execute" + translation + " " + rotation);
     DrivetrainSubsystem.getInstance().holonomicDrive(translation, rotation, !robotOriented);
+}
+
+public double deadZoneAdjust(double input, double deadzone) {
+    if(input > deadzone) {
+        input = ((input - deadzone)/(1.0 - deadzone));
+      } else if(input < -deadzone) {
+        input = ((input + deadzone)/(1.0 - deadzone));
+      } else {
+        input = 0;
+      }    
+    return input;
 }
 
 @Override
