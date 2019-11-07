@@ -34,14 +34,14 @@ public class Robot extends TimedRobot {
   private static final double UPDATE_DT = 5e-3; // 5 ms
 
   public static DrivetrainSubsystem drivetrainSubsystem;
-  
+
   Command m_autonomousCommand;
   SendableChooser<Command> m_chooser = new SendableChooser<>();
 
   HolonomicDriveCommand driveCommand;
   ZeroFieldOrientedCommand zeroCommand;
 
-  private final SubsystemManager subsystemManager = new SubsystemManager(drivetrainSubsystem);
+  private SubsystemManager subsystemManager;
   CANSparkMax motor;
   /**
    * This function is run when the robot is first started up and should be
@@ -55,7 +55,7 @@ public class Robot extends TimedRobot {
     SmartDashboard.putData("Auto mode", m_chooser);
     zeroCommand = new ZeroFieldOrientedCommand(drivetrainSubsystem);
     System.out.println("start zeroCommand");
-
+    subsystemManager = new SubsystemManager(drivetrainSubsystem);
     driveCommand = new HolonomicDriveCommand();
 
     
