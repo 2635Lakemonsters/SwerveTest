@@ -71,7 +71,7 @@ public class DrivetrainSubsystem extends SwerveDrivetrain {
   
   private static final PidConstants SNAP_ROTATION_CONSTANTS = new PidConstants(0.3, 0.01, 0.0);
 
-  private static final DrivetrainSubsystem instance = new DrivetrainSubsystem();
+  //private static final DrivetrainSubsystem instance = new DrivetrainSubsystem();
 
   private SwerveModule[] swerveModules;
 
@@ -90,7 +90,7 @@ public class DrivetrainSubsystem extends SwerveDrivetrain {
   private HolonomicDriveSignal signal = new HolonomicDriveSignal(Vector2.ZERO, 0.0, false);
   private Trajectory.Segment segment = null;
 
-  private DrivetrainSubsystem() {
+  public DrivetrainSubsystem() {
       double frontLeftAngleOffset = FRONT_LEFT_ANGLE_OFFSET_COMPETITION;
       double frontRightAngleOffset = FRONT_RIGHT_ANGLE_OFFSET_COMPETITION;
       double backLeftAngleOffset = BACK_LEFT_ANGLE_OFFSET_COMPETITION;
@@ -246,9 +246,9 @@ public class DrivetrainSubsystem extends SwerveDrivetrain {
       }
   }
 
-  public static DrivetrainSubsystem getInstance() {
-      return instance;
-  }
+//   public static DrivetrainSubsystem getInstance() {
+//       return instance;
+//   }
 
   @Override
   public SwerveModule[] getSwerveModules() {

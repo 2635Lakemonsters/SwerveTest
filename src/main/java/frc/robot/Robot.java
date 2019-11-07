@@ -33,15 +33,15 @@ public class Robot extends TimedRobot {
   public static OI oi;
   private static final double UPDATE_DT = 5e-3; // 5 ms
 
+  public static DrivetrainSubsystem drivetrainSubsystem;
+  
   Command m_autonomousCommand;
   SendableChooser<Command> m_chooser = new SendableChooser<>();
 
   HolonomicDriveCommand driveCommand;
   ZeroFieldOrientedCommand zeroCommand;
 
-  private final SubsystemManager subsystemManager = new SubsystemManager(
-            DrivetrainSubsystem.getInstance()
-    );
+  private final SubsystemManager subsystemManager = new SubsystemManager(drivetrainSubsystem);
   CANSparkMax motor;
   /**
    * This function is run when the robot is first started up and should be
@@ -50,9 +50,10 @@ public class Robot extends TimedRobot {
   @Override
   public void robotInit() {
     oi = new OI();
+    drivetrainSubsystem = new DrivetrainSubsystem();
     // chooser.addOption("My Auto", new MyAutoCommand());
     SmartDashboard.putData("Auto mode", m_chooser);
-    zeroCommand = new ZeroFieldOrientedCommand(DrivetrainSubsystem.getInstance());
+    zeroCommand = new ZeroFieldOrientedCommand(drivetrainSubsystem);
     System.out.println("start zeroCommand");
 
     driveCommand = new HolonomicDriveCommand();
@@ -60,7 +61,8 @@ public class Robot extends TimedRobot {
     
     subsystemManager.enableKinematicLoop(UPDATE_DT);
 
-
+    oi.referenceResetButton.whenPressed(zeroCommand);
+    
     //driveCommand.start();
     motor = new CANSparkMax(1, MotorType.kBrushless);
   }

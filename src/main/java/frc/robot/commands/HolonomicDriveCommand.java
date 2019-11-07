@@ -15,16 +15,17 @@ import frc.robot.subsystems.DrivetrainSubsystem;
 
 public class HolonomicDriveCommand extends Command {
   public HolonomicDriveCommand() {
-    requires(DrivetrainSubsystem.getInstance());
+    requires(Robot.drivetrainSubsystem);
 }
 
 @Override
 protected void execute() {
     //boolean ignoreScalars = Robot.oi.primaryController.getforwardBumperButton().get();
 
-    double forward = Robot.oi.rightStick.getRawAxis(1);
-    double strafe = Robot.oi.rightStick.getRawAxis(0);
-    double rotation = Robot.oi.rightStick.getRawAxis(2);
+    double forward = Robot.oi.leftStick.getRawAxis(1);
+    double strafe = Robot.oi.leftStick.getRawAxis(0);
+    // double rotation = Robot.oi.rightStick.getRawAxis(4);
+    double rotation = Robot.oi.rightStick.getRawAxis(0);
 
     double deadzone = 0.1;
     
@@ -43,7 +44,7 @@ protected void execute() {
     //     translation = translation.rotateBy(Rotation2.fromDegrees(180.0));
     // }
     //System.out.println("HoloDriveCommand.execute" + translation + " " + rotation);
-    DrivetrainSubsystem.getInstance().holonomicDrive(translation, rotation, !robotOriented);
+    Robot.drivetrainSubsystem.holonomicDrive(translation, rotation, !robotOriented);
 }
 
 public double deadZoneAdjust(double input, double deadzone) {

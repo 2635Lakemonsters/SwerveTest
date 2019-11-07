@@ -9,6 +9,8 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
 import org.frcteam2910.common.math.Vector2;
+
+import frc.robot.Robot;
 import frc.robot.subsystems.DrivetrainSubsystem;
 
 public class DriveCommand extends Command {
@@ -26,12 +28,12 @@ public class DriveCommand extends Command {
 
   @Override
   protected void initialize() {
-      DrivetrainSubsystem.getInstance().holonomicDrive(translation, rotation, fieldOriented);
+      Robot.drivetrainSubsystem.holonomicDrive(translation, rotation, fieldOriented);
   }
 
   @Override
   protected void end() {
-      DrivetrainSubsystem.getInstance().holonomicDrive(Vector2.ZERO, 0.0);
+      Robot.drivetrainSubsystem.holonomicDrive(Vector2.ZERO, 0.0);
   }
 
   @Override

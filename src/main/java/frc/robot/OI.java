@@ -7,6 +7,8 @@
 
 package frc.robot;
 import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj.buttons.Button;
+import edu.wpi.first.wpilibj.buttons.JoystickButton;
 
 
 /**
@@ -17,6 +19,10 @@ public class OI {
 
 
   public Joystick rightStick = new Joystick(RobotMap.RIGHT_JOYSTICK_CHANNEL);
+  public Joystick leftStick = new Joystick(RobotMap.LEFT_JOYSTICK_CHANNEL);
+
+  public Button referenceResetButton = new JoystickButton(rightStick, RobotMap.REFERENCE_RESET_BUTTON);
+
   //// CREATING BUTTONS
   // One type of button is a joystick button which is any button on a
   //// joystick.
